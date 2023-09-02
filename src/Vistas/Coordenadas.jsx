@@ -29,19 +29,21 @@ export function Coordenadas() {
 
   const handleGuardar = (datosFormulario) => {
     console.log("La ruta es: " + ruta);
-
+    console.log(datosFormulario);
     const requestData = {
       latitud: datosFormulario.latitud,
       longitud: datosFormulario.longitud,
       radio: datosFormulario.radio,
-      velocidad: datosFormulario.velocidad,
-      sonidoVelocidad: datosFormulario.sonidoVelocidad,
+      sonidosVelocidadModel: {
+        id: datosFormulario.velocidad,
+        nombre: datosFormulario.velocidadValor,
+      },
       sonidoGeocerca: datosFormulario.sonidoGeocerca,
       rutasModel: {
         id: ruta,
       },
     };
-
+  
     axios
       .post(`${coordenadasURL}`, requestData)
       .then((response) => {
@@ -93,18 +95,21 @@ export function Coordenadas() {
   };
 
   const handleEditar = (dato) => {
+
     const requestData = {
       latitud: dato.latitud,
       longitud: dato.longitud,
       radio: dato.radio,
-      velocidad: dato.velocidad,
-      sonidoVelocidad: dato.sonidoVelocidad,
+      sonidosVelocidadModel: {
+        id: dato.velocidad,
+        nombre: dato.velocidadValor,
+      },
       sonidoGeocerca: dato.sonidoGeocerca,
       rutasModel: {
         id: ruta,
       },
     };
-  
+    console.log(requestData)
     axios
       .put(`${coordenadasURL}/${dato.id}`, requestData)
       .then((response) => {
@@ -128,7 +133,7 @@ export function Coordenadas() {
     const content = datos
       .map(
         (coordenada) =>
-          `${coordenada.latitud} ${coordenada.longitud} ${coordenada.radio} ${coordenada.velocidad} ${coordenada.sonidoVelocidad} ${coordenada.sonidoGeocerca}\n`
+          `${coordenada.latitud} ${coordenada.longitud} ${coordenada.radio} ${coordenada.sonidosVelocidadModel.nombre} ${coordenada.sonidosVelocidadModel.id + 1} ${coordenada.sonidoGeocerca}\n`
       )
       .join("");
 
@@ -185,8 +190,8 @@ export function Coordenadas() {
                 <td>{coordenada.latitud}</td>
                 <td>{coordenada.longitud}</td>
                 <td>{coordenada.radio}</td>
-                <td>{coordenada.velocidad}</td>
-                <td>{coordenada.sonidoVelocidad}</td>
+                <td>{coordenada.sonidosVelocidadModel.nombre}</td>
+                <td>{coordenada.sonidosVelocidadModel.id + 1}</td>
                 <td>{coordenada.sonidoGeocerca}</td>
                 <td>
                   <Button

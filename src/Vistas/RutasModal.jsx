@@ -46,7 +46,7 @@ function RutasModal({
   const limpiar = () => {
     setFormData({
       nomruta: "",
-      paisId: "", // Limpiando también los valores de paisId y paisNombre
+      paisId: "", 
       paisNombre: "",
     });
   };

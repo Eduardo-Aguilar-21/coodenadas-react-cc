@@ -11,4 +11,7 @@ export const coordenadasURL = `${base}/coordenadas`
 export const coordenadaxRutaURL = `${coordenadasURL}/ruta/`
 
 // Paises
-export const paisesURL = `${base}/paises`
+export const paisesURL = `${base}/paises`;
+
+// Velocidad
+export const sonidosVelocidadURL = `${base}/sonidosVelocidad`
